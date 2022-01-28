@@ -10,6 +10,14 @@ Item {
     visible: true
 
     //title: qsTr("TestRest")
+    Connections{
+        target: device
+        function onResponseReceived(_response){
+            response.text = _response;
+        }
+
+    }
+
     Row {
         id: buttonRow
         height: 50
@@ -42,8 +50,14 @@ Item {
             text: "SEND"
             width: 70
             height: 30
-            onClicked: device.request(method, enterLink.text.toString(),
-                                      JSON.parse(request.text.toString()))
+            onClicked: {
+                let JSONresponse = JSON.parse(request.text.toString());
+
+                if(method==="GET") JSONresponse = JSON.parse("{}")
+
+                device.request(method, enterLink.text.toString(),
+                                   JSONresponse)
+            }
         }
     }
     Rectangle {
@@ -106,6 +120,7 @@ Item {
             radius: 5
 
             TextEdit {
+                id:response
                 text: "Response"
                 anchors.fill: parent
                 anchors.margins: 10

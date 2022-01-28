@@ -22,9 +22,10 @@ int main(int argc, char *argv[]) {
   //    engine.load(url);
   device a;
   auto *view = new QQuickView();
-  view->setSource(QUrl("qrc:main.qml"));
+
 
   view->rootContext()->setContextProperty("device", &a);
+    view->setSource(QUrl("qrc:main.qml"));
   view->show();
   return app.exec();
 }
