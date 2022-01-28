@@ -8,6 +8,7 @@ Item {
     width: 640
     height: 480
     visible: true
+
     //title: qsTr("TestRest")
     Row {
         id: buttonRow
@@ -41,7 +42,8 @@ Item {
             text: "SEND"
             width: 70
             height: 30
-            onClicked: device.request(method, enterLink.text.toString())
+            onClicked: device.request(method, enterLink.text.toString(),
+                                      JSON.parse(request.text.toString()))
         }
     }
     Rectangle {
@@ -88,6 +90,7 @@ Item {
             radius: 5
 
             TextEdit {
+                id: request
                 text: "Request"
                 anchors.fill: parent
                 anchors.margins: 10
