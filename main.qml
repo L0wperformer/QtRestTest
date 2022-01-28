@@ -41,7 +41,7 @@ Item {
             text: "SEND"
             width: 70
             height: 30
-            onClicked: device.request(method, link)
+            onClicked: device.request(method, enterLink.text.toString())
         }
     }
     Rectangle {
@@ -59,6 +59,7 @@ Item {
         }
         radius: 5
         TextInput {
+            id: enterLink
             anchors {
                 fill: parent
                 margins: 5
@@ -87,6 +88,7 @@ Item {
             radius: 5
 
             TextEdit {
+                text: "Request"
                 anchors.fill: parent
                 anchors.margins: 10
             }
@@ -101,6 +103,7 @@ Item {
             radius: 5
 
             TextEdit {
+                text: "Response"
                 anchors.fill: parent
                 anchors.margins: 10
             }
