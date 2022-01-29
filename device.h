@@ -8,7 +8,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
-#include "httprequestworker.h"
+
 
 class device : public QObject {
   Q_OBJECT

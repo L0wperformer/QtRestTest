@@ -1,23 +1,11 @@
 #include "device.h"
-#include "httprequestworker.h"
+
 
 
 
 device::device(QObject *parent) : QObject(parent) {
     requestMethods = new QNetworkAccessManager();
-//Lambda for handling errors(in debug)
-//    connect(requestMethods, &QNetworkAccessManager::finished,
-//            this, [=](QNetworkReply *reply) {
-//                if (reply->error()) {
-//                    qDebug() << reply->errorString();
-//                    return;
-//                }
 
-//                QString answer = reply->readAll();
-
-//                qDebug() << answer;
-//            }
-//        );
     connect(requestMethods, &QNetworkAccessManager::finished,
             this, &device::handleIncomingData);
 
