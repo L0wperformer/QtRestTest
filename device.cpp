@@ -14,12 +14,20 @@ device::device(QObject *parent) : QObject(parent) {
 
 void device::request(QString method, QString link, QJsonObject requestBody) {
   qDebug() << "requesting... data:"<<requestBody;
+//Save url in settings
+setUrl(link);
+
 
 QNetworkRequest request;
 request.setUrl(QUrl(link));
 
 if(method == "GET"){
 requestMethods->get(request);
+return;
+}
+
+if(method == "POST"){
+
 }
 
 

@@ -80,7 +80,12 @@ Item {
                 margins: 5
             }
 
-            text: "link"
+            text: "http://foo/bar/"
+            Component.onCompleted: {
+                let isSetting = device.getUrl()
+                if (isSetting)
+                    this.text = isSetting
+            }
         }
     }
 

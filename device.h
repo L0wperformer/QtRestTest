@@ -8,15 +8,21 @@
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
+#include <QSettings>
 
 
 class device : public QObject {
   Q_OBJECT
+
 public:
   explicit device(QObject *parent = nullptr);
 
 public slots:
   void request(QString method, QString link, QJsonObject requestBody);
+
+  QString getUrl(){
+      return settings.value("Url").toString();
+  }
 
 signals:
   void responseReceived(QString response);
@@ -24,6 +30,10 @@ private:
   QNetworkAccessManager *requestMethods = nullptr;
   void handleIncomingData(QNetworkReply *data);
 
+  QSettings settings;
+  void setUrl(QString url){
+      settings.setValue("Url",url);
+  }
 };
 
 #endif // DEVICE_H
