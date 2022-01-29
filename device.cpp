@@ -10,6 +10,8 @@ device::device(QObject *parent) : QObject(parent) {
             this, &device::handleIncomingData);
 
 
+
+
 }
 
 void device::request(QString method, QString link, QByteArray requestBody) {
@@ -20,12 +22,16 @@ setUrl(link);
 
 QNetworkRequest request;
 request.setUrl(QUrl(link));
-
+request.setHeader(QNetworkRequest::ContentTypeHeader,QVariant("application/fhir+json"));
+//==========GET===========
 if(method == "GET"){
 requestMethods->get(request);
 return;
 }
-//If method is other than GET, the request body will actually be used
+//========================
+
+//======JSON PARSING======
+//All methods beyond this point actually need the request body
 QJsonParseError parseErr;
 QJsonDocument requestData = QJsonDocument::fromJson(requestBody,&parseErr);
 //===Check Request format===
@@ -34,12 +40,22 @@ if(requestData.isNull()) { //Parse error
     return;
 
 }
+//========================
 
 
-
+//==========POST===========
 if(method == "POST"){
-//requestMethods->post(request,)
+requestMethods->post(request,requestData.toJson(QJsonDocument::Compact));
 }
+
+//=========================
+
+//==========PUT============
+
+//=========================
+
+
+
 
 
 }
