@@ -10,12 +10,11 @@ Item {
     visible: true
 
     //title: qsTr("TestRest")
-    Connections{
+    Connections {
         target: device
-        function onResponseReceived(_response){
-            response.text = _response;
+        function onResponseReceived(_response) {
+            response.text = _response
         }
-
     }
 
     Row {
@@ -51,12 +50,12 @@ Item {
             width: 70
             height: 30
             onClicked: {
-                let JSONresponse = JSON.parse(request.text.toString());
+                let JSONresponse = JSON.parse("{}")
 
-                if(method==="GET") JSONresponse = JSON.parse("{}")
+                if (method !== "GET")
+                    JSONresponse = JSON.parse(request.text.toString())
 
-                device.request(method, enterLink.text.toString(),
-                                   JSONresponse)
+                device.request(method, enterLink.text.toString(), JSONresponse)
             }
         }
     }
@@ -105,7 +104,7 @@ Item {
 
             TextEdit {
                 id: request
-                text: "Request"
+                text: "{\"JsonRequest\"}"
                 anchors.fill: parent
                 anchors.margins: 10
             }
@@ -119,11 +118,16 @@ Item {
             }
             radius: 5
 
-            TextEdit {
-                id:response
-                text: "Response"
+            ScrollView {
                 anchors.fill: parent
-                anchors.margins: 10
+                clip: true
+                TextEdit {
+
+                    id: response
+                    text: "Response"
+                    anchors.fill: parent
+                    anchors.margins: 10
+                }
             }
         }
     }
