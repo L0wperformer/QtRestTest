@@ -18,7 +18,7 @@ public:
   explicit device(QObject *parent = nullptr);
 
 public slots:
-  void request(QString method, QString link, QJsonObject requestBody);
+  void request(QString method, QString link, QByteArray requestBody);
 
   QString getUrl(){
       return settings.value("Url").toString();

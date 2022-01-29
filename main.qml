@@ -50,12 +50,11 @@ Item {
             width: 70
             height: 30
             onClicked: {
-                let JSONresponse = JSON.parse("{}")
+
 
                 if (method !== "GET")
-                    JSONresponse = JSON.parse(request.text.toString())
 
-                device.request(method, enterLink.text.toString(), JSONresponse)
+                device.request(method, enterLink.text.toString(), request.text.toString())
             }
         }
     }
