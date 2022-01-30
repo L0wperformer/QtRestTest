@@ -21,8 +21,11 @@ device::device(QObject *parent) : QObject(parent) {
 
 void device::newRequest(QString method, QString URL, QByteArray requestBody) {
   qDebug() << "requesting... data:"<<requestBody;
-//Save url in settings
-setUrl(URL);
+//Save url in settings---request Setting is saved AFTER Parsing check
+//See below
+settings.setValue("Url",URL);
+
+
 
 //tell request the URI
 request.setUrl(QUrl(URL));
@@ -51,6 +54,9 @@ if(requestData.isNull()) { //Parse error
     emit responseReceived("JSON PARSE ERROR:\n" + parseErr.errorString() );
     return;
 }
+
+settings.setValue("request",requestBody);
+
 
 
 //==========POST===========

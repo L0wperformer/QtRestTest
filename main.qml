@@ -129,6 +129,11 @@ Rectangle {
                     selectByMouse: true
                     color: "black"
                     anchors.margins: 10
+                    Component.onCompleted: {
+                        let isSetting = device.getRequest()
+                        if (isSetting)
+                            this.text = isSetting
+                    }
                 }
             }
         }

@@ -19,9 +19,13 @@ public:
 
 public slots:
   void newRequest(QString method, QString link, QByteArray requestBody);
-
+//=======Getters for the Settings to Qml======
   QString getUrl(){
       return settings.value("Url").toString();
+  }
+
+  QString getRequest(){
+      return settings.value("request").toString();
   }
 
 signals:
@@ -32,9 +36,7 @@ private:
   void handleIncomingData(QNetworkReply *data);
 
   QSettings settings;
-  void setUrl(QString url){
-      settings.setValue("Url",url);
-  }
+
 };
 
 #endif // DEVICE_H
