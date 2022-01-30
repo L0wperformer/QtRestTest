@@ -60,6 +60,7 @@ return;
 
 //==========PUT============
 
+
 //=========================
 
 
@@ -70,7 +71,7 @@ return;
 
 void device::handleIncomingData(QNetworkReply *data){
     if(data->error()) {
-        qDebug()<< "ERROR: " << data->errorString();
+        emit responseReceived("ERROR: " + data->errorString());
         return;
     }
 
