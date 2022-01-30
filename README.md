@@ -1,5 +1,5 @@
-# QtRestTest
-This is a small project for testing out my RestAPI with Qt5.15.2
+# Qt/QMLRestTest
+This is a small project for testing out my RestAPI with Qt 5.15.2 and QML
 
 ===ONLY SUPPORTS JSON===
 
