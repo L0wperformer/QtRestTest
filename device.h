@@ -18,7 +18,7 @@ public:
   explicit device(QObject *parent = nullptr);
 
 public slots:
-  void request(QString method, QString link, QByteArray requestBody);
+  void newRequest(QString method, QString link, QByteArray requestBody);
 
   QString getUrl(){
       return settings.value("Url").toString();
@@ -27,7 +27,8 @@ public slots:
 signals:
   void responseReceived(QString response);
 private:
-  QNetworkAccessManager *requestMethods = nullptr;
+  QNetworkAccessManager  *requestMethods= new QNetworkAccessManager(this);
+  QNetworkRequest request;
   void handleIncomingData(QNetworkReply *data);
 
   QSettings settings;

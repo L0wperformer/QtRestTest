@@ -1,28 +1,34 @@
 #include "device.h"
+#include <QTemporaryFile>
+#include <QBuffer>
+#include <QFile>
 
 
 
 
 device::device(QObject *parent) : QObject(parent) {
-    requestMethods = new QNetworkAccessManager();
 
+//===When request finishes it returns the reply, which we "catch" and handle in different function
     connect(requestMethods, &QNetworkAccessManager::finished,
             this, &device::handleIncomingData);
-
-
-
+//===Tell the request that Json will be sent===
+    request.setHeader(QNetworkRequest::ContentTypeHeader,"application/json");
 
 }
+//=========================================================
+//=====================Req/Res function====================
+//=========================================================
 
-void device::request(QString method, QString link, QByteArray requestBody) {
+void device::newRequest(QString method, QString URL, QByteArray requestBody) {
   qDebug() << "requesting... data:"<<requestBody;
 //Save url in settings
-setUrl(link);
+setUrl(URL);
+
+//tell request the URI
+request.setUrl(QUrl(URL));
 
 
-QNetworkRequest request;
-request.setUrl(QUrl(link));
-request.setHeader(QNetworkRequest::ContentTypeHeader,QVariant("application/fhir+json"));
+
 //==========GET===========
 if(method == "GET"){
 requestMethods->get(request);
@@ -31,21 +37,22 @@ return;
 //========================
 
 //======JSON PARSING======
-//All methods beyond this point actually need the request body
+//This is only for checking if the Json is formatted
+//correctly. The original array will actually be sent
+//to avoid needless parsing
 QJsonParseError parseErr;
 QJsonDocument requestData = QJsonDocument::fromJson(requestBody,&parseErr);
 //===Check Request format===
 if(requestData.isNull()) { //Parse error
     emit responseReceived("JSON PARSE ERROR:\n" + parseErr.errorString() );
     return;
-
 }
-//========================
 
 
 //==========POST===========
 if(method == "POST"){
-requestMethods->post(request,requestData.toJson(QJsonDocument::Compact));
+
+requestMethods->post(request,requestBody);
 }
 
 //=========================
@@ -67,12 +74,14 @@ void device::handleIncomingData(QNetworkReply *data){
     }
 
     QJsonDocument dataObject = QJsonDocument::fromJson(data->readAll());
+
     emit responseReceived(dataObject.toJson());
 
-
-
-
 }
+//=========================================================
+//=========================================================
+//=========================================================
+
 
 
 

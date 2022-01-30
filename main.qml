@@ -51,8 +51,8 @@ Item {
             height: 30
             onClicked: {
 
-                device.request(method, enterLink.text.toString(),
-                               request.text.toString())
+                device.newRequest(method, enterLink.text.toString(),
+                                  request.text.toString())
             }
         }
     }
