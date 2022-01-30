@@ -5,8 +5,8 @@ import QtQuick.Controls 2.12
 Item {
     property string method: "GET"
     id: root
-    width: 640
-    height: 480
+    width: 900
+    height: 500
     visible: true
 
     //title: qsTr("TestRest")
@@ -41,7 +41,7 @@ Item {
         RadioButton {
             id: deleteButton
             text: "DELETE"
-            onClicked: method = "PATCH"
+            onClicked: method = "DELETE"
         }
         RoundButton {
 

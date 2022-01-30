@@ -21,6 +21,7 @@ int main(int argc, char *argv[]) {
 
   view->rootContext()->setContextProperty("device", &a);
   view->setSource(QUrl("qrc:main.qml"));
+  view->setResizeMode(QQuickView::SizeRootObjectToView);
   view->show();
   return app.exec();
 }
