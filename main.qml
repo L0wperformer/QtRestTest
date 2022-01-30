@@ -76,7 +76,7 @@ Item {
                 fill: parent
                 margins: 5
             }
-
+            selectByMouse: true
             text: "http://foo/bar/"
             Component.onCompleted: {
                 let isSetting = device.getUrl()
