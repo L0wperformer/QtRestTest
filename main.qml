@@ -103,12 +103,16 @@ Item {
                 width: 2
             }
             radius: 5
-
-            TextEdit {
-                id: request
-                text: "{\"JsonRequest\"}"
+            ScrollView {
                 anchors.fill: parent
-                anchors.margins: 10
+                clip: true
+                TextArea {
+                    id: request
+                    placeholderText: "{\"JsonRequest\":\"foo\"}"
+                    selectByMouse: true
+                    color: "black"
+                    anchors.margins: 10
+                }
             }
         }
         Rectangle {
@@ -123,11 +127,13 @@ Item {
             ScrollView {
                 anchors.fill: parent
                 clip: true
-                TextEdit {
+                TextArea {
 
                     id: response
-                    text: "Response"
-                    anchors.fill: parent
+                    placeholderText: "Response"
+                    readOnly: true
+                    selectByMouse: true
+                    color: "black"
                     anchors.margins: 10
                 }
             }
