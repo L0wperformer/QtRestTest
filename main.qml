@@ -2,14 +2,14 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.12
 
-Item {
+Rectangle {
     property string method: "GET"
     id: root
     width: 900
     height: 500
     visible: true
+    color: "lightgrey"
 
-    //title: qsTr("TestRest")
     Connections {
         target: device
         function onResponseReceived(_response) {
@@ -22,33 +22,50 @@ Item {
         height: 50
         spacing: 10
         anchors.horizontalCenter: parent.horizontalCenter
+
         RadioButton {
             checked: true
             id: getButton
             text: "GET"
             onClicked: method = "GET"
+            anchors.verticalCenter: parent.verticalCenter
         }
         RadioButton {
             id: postButton
             text: "POST"
             onClicked: method = "POST"
+            anchors.verticalCenter: parent.verticalCenter
         }
         RadioButton {
             id: patchButton
             text: "PATCH"
             onClicked: method = "PATCH"
+            anchors.verticalCenter: parent.verticalCenter
         }
         RadioButton {
             id: deleteButton
             text: "DELETE"
             onClicked: method = "DELETE"
+            anchors.verticalCenter: parent.verticalCenter
         }
         RoundButton {
 
             radius: 5
             text: "SEND"
+
             width: 70
             height: 30
+            anchors.verticalCenter: parent.verticalCenter
+            background: Rectangle {
+                radius: parent.radius
+                anchors.fill: parent
+                color: "lightgrey"
+                border {
+                    color: parent.pressed ? "red" : "black"
+                    width: 1
+                }
+            }
+
             onClicked: {
 
                 device.newRequest(method, enterLink.text.toString(),
