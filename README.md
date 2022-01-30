@@ -1,8 +1,14 @@
 # QtRestTest
 This is a small project for testing out my RestAPI with Qt5.15.2
 
-I have no idea if I'm ever  going to finish this
+===ONLY SUPPORTS JSON===
 
-Also I am no professional programmer so everything might suck and is subject to change/suck
+Use this small programm to GET POST PATCH or DELETE your favourite data :)
+Or look at a sourcecode to learn how to do it.
 
-Handle with care
+Keep in mind, I only did this because I needed to learn how to use REST with 
+Qt for another project  so use this as a  minimal working example.
+
+Hopefully this helps you in some way :D
+
+
