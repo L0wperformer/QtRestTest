@@ -55,14 +55,13 @@ if(requestData.isNull()) { //Parse error
 
 //==========POST===========
 if(method == "POST"){
-
 requestMethods->post(request,requestBody);
 return;
 }
-
-
-
 //==========PATCH============
+if(method == "PATCH"){
+    requestMethods->sendCustomRequest(request,"PATCH",requestBody);
+}
 
 
 
