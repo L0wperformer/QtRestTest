@@ -34,7 +34,11 @@ if(method == "GET"){
 requestMethods->get(request);
 return;
 }
-//========================
+//========DELETE==========
+if(method == "DELETE"){
+requestMethods->deleteResource(request);
+return;
+}
 
 //======JSON PARSING======
 //This is only for checking if the Json is formatted
@@ -56,12 +60,12 @@ requestMethods->post(request,requestBody);
 return;
 }
 
-//=========================
-
-//==========PUT============
 
 
-//=========================
+//==========PATCH============
+
+
+
 
 
 
